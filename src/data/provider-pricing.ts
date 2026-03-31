@@ -23,6 +23,11 @@ export enum AIProvider {
   GROQ = 'groq',
   OPENROUTER = 'openrouter',
   OLLAMA = 'ollama',
+  MOONSHOT = 'moonshot',
+  KILOCODE = 'kilocode',
+  QWEN = 'qwen',
+  NEMOTRON = 'nemotron',
+  MINIMAX = 'minimax',
 }
 
 export const PROVIDER_INFO: Record<AIProvider, {
@@ -84,6 +89,36 @@ export const PROVIDER_INFO: Record<AIProvider, {
     website: 'https://ollama.ai',
     color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200',
     description: 'Local models - completely free',
+  },
+  [AIProvider.MOONSHOT]: {
+    name: 'Moonshot AI',
+    website: 'https://moonshot.cn',
+    color: 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200',
+    description: 'Kimi models with generous free tier',
+  },
+  [AIProvider.KILOCODE]: {
+    name: 'Kilocode Gateway',
+    website: 'https://kilocode.ai',
+    color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
+    description: 'Smart gateway with /free, /balance, /auto endpoints',
+  },
+  [AIProvider.QWEN]: {
+    name: 'Alibaba Qwen',
+    website: 'https://qwenlm.ai',
+    color: 'bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200',
+    description: 'Strong open models with multilingual support',
+  },
+  [AIProvider.NEMOTRON]: {
+    name: 'NVIDIA Nemotron',
+    website: 'https://build.nvidia.com',
+    color: 'bg-lime-100 text-lime-800 dark:bg-lime-900 dark:text-lime-200',
+    description: 'NVIDIA\'s enterprise models via API',
+  },
+  [AIProvider.MINIMAX]: {
+    name: 'MiniMax',
+    website: 'https://minimaxi.com',
+    color: 'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200',
+    description: 'Chinese AI with free tier available',
   },
 };
 
@@ -371,6 +406,163 @@ export const MODEL_PRICING: ModelPricing[] = [
     freeTierLimit: 'Local - requires Ollama setup',
     features: ['Code specialized', 'Local', 'Private'],
   },
+  // Moonshot AI (Kimi) - Free tier available
+  {
+    identifier: 'moonshot-v1-8k',
+    name: 'Kimi K1.5 (8K)',
+    provider: AIProvider.MOONSHOT,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Free: 1M tokens/day',
+    features: ['8K context', 'Chinese optimized', 'Coding specialist'],
+  },
+  {
+    identifier: 'moonshot-v1-32k',
+    name: 'Kimi K1.5 (32K)',
+    provider: AIProvider.MOONSHOT,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Free: 1M tokens/day',
+    features: ['32K context', 'Chinese optimized', 'Coding specialist'],
+  },
+  {
+    identifier: 'moonshot-v1-128k',
+    name: 'Kimi K1.5 (128K)',
+    provider: AIProvider.MOONSHOT,
+    costPer1MInput: 0.50,
+    costPer1MOutput: 1.00,
+    isFree: false,
+    features: ['128K context', 'Long context', 'Coding specialist'],
+  },
+  // Kilocode Gateway - Smart routing with /free, /balance, /auto
+  {
+    identifier: 'kilocode/free',
+    name: 'Kilocode /free',
+    provider: AIProvider.KILOCODE,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Routes to best free model available',
+    features: ['Auto-routing', 'Always free', 'Best effort'],
+  },
+  {
+    identifier: 'kilocode/balance',
+    name: 'Kilocode /balance',
+    provider: AIProvider.KILOCODE,
+    costPer1MInput: 0.30,
+    costPer1MOutput: 0.60,
+    isFree: false,
+    features: ['Balanced cost/quality', 'Smart routing', 'Reliable'],
+  },
+  {
+    identifier: 'kilocode/auto',
+    name: 'Kilocode /auto',
+    provider: AIProvider.KILOCODE,
+    costPer1MInput: 2.00,
+    costPer1MOutput: 6.00,
+    isFree: false,
+    features: ['Best model for task', 'Smart routing', 'Premium'],
+  },
+  {
+    identifier: 'kilocode/nemotron-70b',
+    name: 'Nemotron 70B (Kilocode)',
+    provider: AIProvider.KILOCODE,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Via Kilocode free tier',
+    features: ['NVIDIA model', '70B params', 'Free via KC'],
+  },
+  {
+    identifier: 'kilocode/minimax-text-01',
+    name: 'MiniMax Text 01 (Kilocode)',
+    provider: AIProvider.KILOCODE,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Via Kilocode free tier',
+    features: ['MiniMax model', 'Chinese/English', 'Free via KC'],
+  },
+  // Qwen (Alibaba) - Mixed free/paid
+  {
+    identifier: 'qwen-turbo',
+    name: 'Qwen 2.5 Turbo',
+    provider: AIProvider.QWEN,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Free tier available',
+    features: ['128K context', 'Multilingual', 'Coding'],
+  },
+  {
+    identifier: 'qwen-plus',
+    name: 'Qwen 2.5 Plus',
+    provider: AIProvider.QWEN,
+    costPer1MInput: 0.40,
+    costPer1MOutput: 1.20,
+    isFree: false,
+    features: ['128K context', 'Enhanced reasoning', 'Multilingual'],
+  },
+  {
+    identifier: 'qwen-max',
+    name: 'Qwen 2.5 Max',
+    provider: AIProvider.QWEN,
+    costPer1MInput: 1.60,
+    costPer1MOutput: 4.80,
+    isFree: false,
+    features: ['128K context', 'Highest quality', 'Agent capable'],
+  },
+  {
+    identifier: 'qwen-coder-plus',
+    name: 'Qwen 2.5 Coder Plus',
+    provider: AIProvider.QWEN,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Free tier available',
+    features: ['Code specialist', '128K context', 'Free tier'],
+  },
+  // NVIDIA Nemotron - Enterprise
+  {
+    identifier: 'nvidia/nemotron-4-340b',
+    name: 'Nemotron-4 340B',
+    provider: AIProvider.NEMOTRON,
+    costPer1MInput: 2.50,
+    costPer1MOutput: 7.50,
+    isFree: false,
+    features: ['340B params', 'Enterprise', 'NVIDIA optimized'],
+  },
+  {
+    identifier: 'nvidia/nemotron-4-15b',
+    name: 'Nemotron-4 15B',
+    provider: AIProvider.NEMOTRON,
+    costPer1MInput: 0.20,
+    costPer1MOutput: 0.60,
+    isFree: false,
+    features: ['15B params', 'Efficient', 'NVIDIA optimized'],
+  },
+  // MiniMax - Free tier available
+  {
+    identifier: 'minimax-text-01',
+    name: 'MiniMax Text 01',
+    provider: AIProvider.MINIMAX,
+    costPer1MInput: 0,
+    costPer1MOutput: 0,
+    isFree: true,
+    freeTierLimit: 'Free tier available',
+    features: ['256K context', 'Chinese/English', 'Free tier'],
+  },
+  {
+    identifier: 'minimax-speech-01',
+    name: 'MiniMax Speech 01',
+    provider: AIProvider.MINIMAX,
+    costPer1MInput: 0.15,
+    costPer1MOutput: 0.45,
+    isFree: false,
+    features: ['TTS capable', 'Voice cloning', 'Multilingual'],
+  },
 ];
 
 // Helper functions
@@ -430,6 +622,11 @@ export function getProviderDocsUrl(provider: AIProvider): string {
     [AIProvider.GROQ]: 'https://console.groq.com/keys',
     [AIProvider.OPENROUTER]: 'https://openrouter.ai/keys',
     [AIProvider.OLLAMA]: 'https://ollama.ai/download',
+    [AIProvider.MOONSHOT]: 'https://platform.moonshot.cn/docs/api-keys',
+    [AIProvider.KILOCODE]: 'https://kilocode.ai/docs/api-keys',
+    [AIProvider.QWEN]: 'https://dashscope.aliyun.com/apikey',
+    [AIProvider.NEMOTRON]: 'https://build.nvidia.com/explore/discover',
+    [AIProvider.MINIMAX]: 'https://platform.minimaxi.com/user-center/basic-information/interface-key',
   };
   return docsUrls[provider] || '#';
 }
@@ -442,10 +639,15 @@ export function getFreeTierInfo(provider: AIProvider): string {
     [AIProvider.TOGETHER]: 'No free tier - pay per use',
     [AIProvider.GEMINI]: 'Free: 1500 requests/day',
     [AIProvider.COHERE]: 'Trial credits available',
-    [AIProvider.MISTRAL]: 'Trial credits available',
+    [AIProvider.MISTRAL]: 'Free tier via La Plateforme',
     [AIProvider.GROQ]: 'Free: 20 req/min, 1M tokens/min',
     [AIProvider.OPENROUTER]: 'Limited free daily requests',
     [AIProvider.OLLAMA]: 'Completely free (local)',
+    [AIProvider.MOONSHOT]: 'Free: 1M tokens/day',
+    [AIProvider.KILOCODE]: '/free endpoint always free',
+    [AIProvider.QWEN]: 'Free tier for Turbo/Coder models',
+    [AIProvider.NEMOTRON]: 'Free trial credits',
+    [AIProvider.MINIMAX]: 'Free tier available',
   };
   return info[provider] || '';
 }
@@ -454,4 +656,15 @@ export function getFreeTierInfo(provider: AIProvider): string {
 export function requiresApiKey(provider: AIProvider): boolean {
   // Ollama runs locally and doesn't require an API key
   return provider !== AIProvider.OLLAMA;
+}
+
+// Get endpoint options for Kilocode
+export function getKilocodeEndpoints(): { id: string; name: string; description: string }[] {
+  return [
+    { id: 'kilocode/free', name: '/free', description: 'Routes to best available free model' },
+    { id: 'kilocode/balance', name: '/balance', description: 'Balanced cost/performance' },
+    { id: 'kilocode/auto', name: '/auto', description: 'Best model for your task' },
+    { id: 'kilocode/nemotron-70b', name: '/nemotron-70b', description: 'NVIDIA Nemotron 70B' },
+    { id: 'kilocode/minimax-text-01', name: '/minimax-text-01', description: 'MiniMax Text 01' },
+  ];
 }
