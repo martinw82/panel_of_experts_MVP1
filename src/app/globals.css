@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 98%;
+    --foreground: 220 10% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 20%;
+    --primary: 210 40% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 30% 90%;
+    --secondary-foreground: 210 40% 30%;
+    --muted: 210 30% 94%;
+    --muted-foreground: 210 10% 45%;
+    --accent: 270 90% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 20% 85%;
+    --input: 210 20% 90%;
+    --ring: 270 90% 60%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 220 10% 92%;
+    --card: 220 15% 12%;
+    --card-foreground: 220 10% 92%;
+    --popover: 220 15% 12%;
+    --popover-foreground: 220 10% 92%;
+    --primary: 210 40% 60%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 210 20% 20%;
+    --secondary-foreground: 210 30% 80%;
+    --muted: 210 20% 16%;
+    --muted-foreground: 210 10% 60%;
+    --accent: 270 90% 70%;
+    --accent-foreground: 220 20% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 20% 24%;
+    --input: 210 20% 20%;
+    --ring: 270 90% 70%;
+  }
+
+  * { @apply border-[color:hsl(var(--border))]; }
+  body { @apply bg-background text-foreground; }
+}
+
+@layer components {
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+}
