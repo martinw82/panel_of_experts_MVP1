@@ -417,3 +417,35 @@ export function formatTokens(tokens: number): string {
   if (tokens >= 1_000) return `${(tokens / 1_000).toFixed(1)}K`;
   return tokens.toString();
 }
+
+// Get API key documentation URL for a provider
+export function getProviderDocsUrl(provider: AIProvider): string {
+  const docsUrls: Record<AIProvider, string> = {
+    [AIProvider.OPENAI]: 'https://platform.openai.com/api-keys',
+    [AIProvider.ANTHROPIC]: 'https://console.anthropic.com/settings/keys',
+    [AIProvider.TOGETHER]: 'https://api.together.xyz/settings/api-keys',
+    [AIProvider.GEMINI]: 'https://aistudio.google.com/app/apikey',
+    [AIProvider.COHERE]: 'https://dashboard.cohere.com/api-keys',
+    [AIProvider.MISTRAL]: 'https://console.mistral.ai/api-keys/',
+    [AIProvider.GROQ]: 'https://console.groq.com/keys',
+    [AIProvider.OPENROUTER]: 'https://openrouter.ai/keys',
+    [AIProvider.OLLAMA]: 'https://ollama.ai/download',
+  };
+  return docsUrls[provider] || '#';
+}
+
+// Get free tier information for a provider
+export function getFreeTierInfo(provider: AIProvider): string {
+  const info: Record<AIProvider, string> = {
+    [AIProvider.OPENAI]: 'No free tier - pay per use',
+    [AIProvider.ANTHROPIC]: 'No free tier - pay per use',
+    [AIProvider.TOGETHER]: 'No free tier - pay per use',
+    [AIProvider.GEMINI]: 'Free: 1500 requests/day',
+    [AIProvider.COHERE]: 'Trial credits available',
+    [AIProvider.MISTRAL]: 'Trial credits available',
+    [AIProvider.GROQ]: 'Free: 20 req/min, 1M tokens/min',
+    [AIProvider.OPENROUTER]: 'Limited free daily requests',
+    [AIProvider.OLLAMA]: 'Completely free (local)',
+  };
+  return info[provider] || '';
+}
