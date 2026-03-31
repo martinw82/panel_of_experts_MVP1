@@ -449,3 +449,9 @@ export function getFreeTierInfo(provider: AIProvider): string {
   };
   return info[provider] || '';
 }
+
+// Check if a provider requires an API key
+export function requiresApiKey(provider: AIProvider): boolean {
+  // Ollama runs locally and doesn't require an API key
+  return provider !== AIProvider.OLLAMA;
+}
